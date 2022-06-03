@@ -31,39 +31,39 @@ const App = () => {
 
 	useEffect(() => {
 		fetch('https://disease.sh/v3/covid-19/all')
-			?.then((response) => response.json())
-			?.then((data) => {
+			.then((response) => response.json())
+			.then((data) => {
 				setCountryInfo(data);
 			})
-			?.catch((err) => {
-				log?.err(err);
+			.catch((err) => {
+				log.err(err);
 			});
 	}, []);
 
 	useEffect(() => {
 		const getCountriesData = async () => {
 			await fetch('https://disease.sh/v3/covid-19/countries')
-				?.then((response) => response.json())
-				?.then((data) => {
-					const countries = data?.map((country) => ({
-						name: country?.country,
-						value: country?.countryInfo?.iso2,
+				.then((response) => response.json())
+				.then((data) => {
+					const countries = data.map((country) => ({
+						name: country.country,
+						value: country.countryInfo.iso2,
 					}));
 					let sortedData = sortData(data);
 					setTableData(sortedData);
 					setMapCountries(data);
 					setCountries(countries);
-					log?.succOut(sortedData);
+					log.succOut(sortedData);
 				})
-				?.catch((err) => {
-					log?.errIn(err);
+				.catch((err) => {
+					log.errIn(err);
 				});
 		};
 		getCountriesData();
 	}, []);
 
 	const onCountryChange = async (e) => {
-		const countryCode = e?.target?.value;
+		const countryCode = e.target.value;
 		setInputCountry(countryCode);
 
 		const url =
@@ -72,21 +72,21 @@ const App = () => {
 				: `https://disease.sh/v3/covid-19/countries/${countryCode}`;
 
 		await fetch(url)
-			?.then((response) => response?.json())
-			?.then((data) => {
+			.then((response) => response.json())
+			.then((data) => {
 				setInputCountry(countryCode);
 				setCountryInfo(data);
-				if(countryCode === 'worldwide'){
-					setMapCenter({ lat: 34.80746, lng: -40.4796, })
+				if (countryCode === 'worldwide') {
+					setMapCenter({ lat: 34.80746, lng: -40.4796 });
 					setMapZoom(3);
-				}else{
-					setMapCenter([data?.countryInfo?.lat, data?.countryInfo?.long]);
+				} else {
+					setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
 					setMapZoom(4);
 				}
-				log?.varOut(data);
+				log.varOut(data);
 			})
-			?.catch((err) => {
-				log?.errIn(err);
+			.catch((err) => {
+				log.errIn(err);
 			});
 	};
 
@@ -105,9 +105,9 @@ const App = () => {
 							<MenuItem value='worldwide' key='worldwide'>
 								Worldwide
 							</MenuItem>
-							{countries?.map((country, idx) => (
-								<MenuItem value={country?.value} key={idx}>
-									{country?.name}
+							{countries.map((country, idx) => (
+								<MenuItem value={country.value} key={idx}>
+									{country.name}
 								</MenuItem>
 							))}
 						</Select>
@@ -119,23 +119,23 @@ const App = () => {
 						active={casesType === 'cases'}
 						onClick={(e) => setCasesType('cases')}
 						title='Coronavirus Cases'
-						cases={prettyPrintStat(countryInfo?.todayCases)}
-						total={numeral(countryInfo?.cases)?.format('0.0a')}
+						cases={prettyPrintStat(countryInfo.todayCases)}
+						total={numeral(countryInfo.cases).format('0.0a')}
 					/>
 					<InfoBox
 						active={casesType === 'recovered'}
 						onClick={(e) => setCasesType('recovered')}
 						title='Recovered'
-						cases={prettyPrintStat(countryInfo?.todayRecovered)}
-						total={numeral(countryInfo?.recovered)?.format('0.0a')}
+						cases={prettyPrintStat(countryInfo.todayRecovered)}
+						total={numeral(countryInfo.recovered).format('0.0a')}
 					/>
 					<InfoBox
 						isOrange
 						active={casesType === 'deaths'}
 						onClick={(e) => setCasesType('deaths')}
 						title='Deaths'
-						cases={prettyPrintStat(countryInfo?.deaths)}
-						total={numeral(countryInfo?.deaths)?.format('0.0a')}
+						cases={prettyPrintStat(countryInfo.deaths)}
+						total={numeral(countryInfo.deaths).format('0.0a')}
 					/>
 				</div>
 
@@ -155,7 +155,7 @@ const App = () => {
 					<h3 className='app__right_text-center app__graphTitle'>
 						Worldwide new <span>{casesType}</span>
 					</h3>
-					<LineGraph className="app__graph" casesType={casesType} />
+					<LineGraph className='app__graph' casesType={casesType} />
 				</CardContent>
 			</Card>
 		</div>

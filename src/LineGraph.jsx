@@ -17,8 +17,8 @@ const options = {
 		mode: 'index',
 		intersect: false,
 		callbacks: {
-			label: function (tooltipItem, data) {
-				return numeral(tooltipItem?.value)?.format('+0,0');
+			label: function(tooltipItem, data) {
+				return numeral(tooltipItem.value).format('+0,0');
 			},
 		},
 	},
@@ -39,8 +39,8 @@ const options = {
 				},
 				ticks: {
 					// Include a dollar sign in the ticks
-					callback: function (value, index, values) {
-						return numeral(value)?.format('0a');
+					callback: function(value, index, values) {
+						return numeral(value).format('0a');
 					},
 				},
 			},
@@ -51,21 +51,20 @@ const options = {
 const buildChartData = (data, casesType) => {
 	let chartData = [];
 	let lastDataPoint;
-	for (let date in data?.cases) {
+	for (let date in data.cases) {
 		if (lastDataPoint) {
 			let newDataPoint = {
 				x: date,
 				y: data[casesType][date] - lastDataPoint,
 			};
-			chartData?.push(newDataPoint);
+			chartData.push(newDataPoint);
 		}
 		lastDataPoint = data[casesType][date];
 	}
 	return chartData;
-
 };
 
-function LineGraph({ casesType , ...props }) {
+function LineGraph({ casesType, ...props }) {
 	const [data, setData] = useState({});
 
 	useEffect(() => {
@@ -73,15 +72,16 @@ function LineGraph({ casesType , ...props }) {
 			await fetch(
 				'https://disease.sh/v3/covid-19/historical/all?lastdays=365'
 			)
-				?.then((response) => {
-					return response?.json();
+				.then((response) => {
+					return response.json();
 				})
-				?.then((data) => {
+				.then((data) => {
 					let chartData = buildChartData(data, casesType);
 					setData(chartData);
-				})?.catch((err)=>{
-                    log?.errIn(err);
-                });
+				})
+				.catch((err) => {
+					log.errIn(err);
+				});
 		};
 
 		fetchData();
@@ -89,7 +89,8 @@ function LineGraph({ casesType , ...props }) {
 
 	return (
 		<div className={props.className}>
-			{data?.length > 0 && (
+			{' '}
+			{data.length > 0 && (
 				<Line
 					data={{
 						datasets: [
@@ -102,7 +103,7 @@ function LineGraph({ casesType , ...props }) {
 					}}
 					options={options}
 				/>
-			)}
+			)}{' '}
 		</div>
 	);
 }

@@ -20,24 +20,28 @@ const Table = (props) => {
 						}}
 					>
 						<th scope='col'>
-							<strong>Country</strong>
-						</th>
+							<strong> Country </strong>{' '}
+						</th>{' '}
 						<th scope='col'>
-							<strong>Cases</strong>
-						</th>
-					</tr>
-				</thead>
+							<strong> Cases </strong>{' '}
+						</th>{' '}
+					</tr>{' '}
+				</thead>{' '}
 				<tbody>
-					{countries?.map(({ country, cases }) => (
+					{' '}
+					{countries.map(({ country, cases }) => (
 						<tr key={country}>
-							<td>{country}</td>
+							<td> {country} </td>{' '}
 							<td>
-								<strong>{numeral(cases).format('0,0')}</strong>
-							</td>
+								<strong>
+									{' '}
+									{numeral(cases).format('0,0')}{' '}
+								</strong>{' '}
+							</td>{' '}
 						</tr>
-					))}
-				</tbody>
-			</table>
+					))}{' '}
+				</tbody>{' '}
+			</table>{' '}
 		</div>
 	);
 };
