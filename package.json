@@ -10,6 +10,7 @@
         "@testing-library/user-event": "^13.5.0",
         "autoprefixer": "^10.4.7",
         "chart.js": "^2.8.0",
+        "gh-pages": "^4.0.0",
         "leaflet": "^1.6.0",
         "nth-check": ">=2.0.1",
         "numeral": "^2.0.6",
@@ -23,7 +24,7 @@
     },
     "scripts": {
         "start": "react-scripts start",
-        "build": "react-scripts build ",
+        "build": "react-scripts build && react-scripts start",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
