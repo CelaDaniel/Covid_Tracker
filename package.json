@@ -1,8 +1,16 @@
 {
     "name": "covid-19-tracker",
     "version": "0.1.0",
+    "main": "index.js",
+    "author": "Daniel Cela <d-cela.com>",
+    "license": "ISC",
     "private": true,
-    "homepage": "https://github.com/DanielCela111/COVID_Tracker",
+    "engineStrict": true,
+    "engines": {
+        "npm": ">=8.5.0",
+        "node": ">=16.14.2"
+    },
+    "repository": "https://github.com/DanielCela111/COVID_Tracker.git",
     "dependencies": {
         "@material-ui/core": "^4.11.0",
         "@testing-library/jest-dom": "^5.16.3",
@@ -24,7 +32,7 @@
     },
     "scripts": {
         "start": "react-scripts start",
-        "build": "react-scripts build && react-scripts start",
+        "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
@@ -45,9 +53,5 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
-    },
-    "main": "index.js",
-    "repository": "https://github.com/DanielCela111/COVID_Tracker.git",
-    "author": "Daniel Cela <danielcela111@gmail.com>",
-    "license": "MIT"
+    }
 }
